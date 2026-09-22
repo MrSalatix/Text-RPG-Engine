@@ -33,8 +33,8 @@ class Character:
         print('== == == == == == == == == ==')
 
     def take_damage(self, amount_damage):
-        if damage >= 0:
-            self.health -= damage
+        if amount_damage >= 0:
+            self.health -= amount_damage
             if self.health <= 0:
                 self.health = 0
         return self.health
