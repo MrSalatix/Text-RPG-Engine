@@ -26,8 +26,9 @@ def choice_menu_option():
 
 def character_name_choice():
     while True:
-        character_name = input("Назовите персонажа: ")
-        if character_name == "" or character_name.isspace() == True:
+        raw_character_name = input("Назовите персонажа: ")
+        character_name = raw_character_name.strip()
+        if character_name == "":
             continue
         else:
             break
@@ -36,9 +37,8 @@ def character_name_choice():
 def character_class_choice():
     print("Выберите класс персонажа")
     print("1. Warrior  2. Mage  3. Archer")
-    choice = input()
-    character_class = "None"
     while True:
+        choice = input()
         match choice:
             case "1":
                 character_class = "Warrior"
@@ -54,19 +54,19 @@ def character_class_choice():
                 continue
     return character_class
 
-def character_stats(character_name, character_class):
+def create_character(character_name, character_class):
     match character_class:
         case "Warrior":
-            character = Character(character_name, character_class, 200, 0, 20, 20, 200, 0)
+            character = Character(character_name, character_class, 20, 20, 200, 0)
         case "Mage":
-            character = Character(character_name, character_class, 50, 500, 10, 10, 50, 500)
+            character = Character(character_name, character_class, 10, 10, 50, 500)
         case "Archer":
-            character = Character(character_name, character_class, 100, 50, 15, 15, 100, 50)
+            character = Character(character_name, character_class, 15, 15, 100, 50)
     return character
 def new_game():
     character_name = character_name_choice()
     character_class = character_class_choice()
-    character = character_stats(character_name, character_class)
+    character = create_character(character_name, character_class)
     character.describe_character()
     return character
 
