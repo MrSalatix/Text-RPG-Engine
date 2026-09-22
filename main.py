@@ -8,15 +8,25 @@ def menu():
     print("3. Exit")
 
 def choice_menu_option():
-    option = input()
-    if option == "1": print("This don't work yet:(")
-    elif option == "2": print("This don't work yet:(")
-    elif option == "3": print("Goodbye")
-    else: print("Please enter a valid option")
-
+    option = input("Выберите опцию: ")
+    if option == "1":
+        print("This don't work yet:(")
+        return False
+    elif option == "2":
+        print("This don't work yet:(")
+        return False
+    elif option == "3":
+        print("Goodbye")
+        return True
+    else:
+        print("Please enter a valid option")
+        return False
 
 while True:
     menu()
-    choice_menu_option()
+    should_exit = choice_menu_option()
+    if should_exit:
+        break
+
 
 
