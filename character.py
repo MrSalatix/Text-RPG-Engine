@@ -1,5 +1,6 @@
 class Character:
-    def __init__(self, name, character_class, health, mana, strength, defense, experience, gold, level, max_health, max_mana):
+
+    def __init__(self, name, character_class, health, mana, strength, defense, max_health, max_mana):
         self.name = name
         self.character_class = character_class
 
@@ -8,13 +9,12 @@ class Character:
 
         self.strength = strength
         self.defense = defense
-
+        self.level = 1
+        self.experience = 0
+        self.gold = 0
         self.max_health = max_health
         self.max_mana = max_mana
-        self.gold = gold
-        self.level = level
-        self.experience = experience
-    def __str__(self):
+    def describe_character(self):  #решил сделать так как удобнее
         print('== == == == == == == == == ==')
         print('CHARACTER')
 
