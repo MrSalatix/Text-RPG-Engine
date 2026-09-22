@@ -32,4 +32,55 @@ class Character:
         print('Gold: ', self.gold)
         print('== == == == == == == == == ==')
 
+    def take_damage(self, amount_damage):
+        if damage >= 0:
+            self.health -= damage
+            if self.health <= 0:
+                self.health = 0
+        return self.health
+
+    def heal(self, amount_heal):
+        if amount_heal >= 0:
+            self.health += amount_heal
+            if self.health >= self.max_health:
+                self.health = self.max_health
+        return self.health
+
+    def spend_mana(self, amount_mana):
+        if amount_mana >= 0:
+            if self.mana >= amount_mana:
+                self.mana -= amount_mana
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    def restore_mana(self, amount_mana):
+        if amount_mana >= 0:
+            self.mana += amount_mana
+            if self.mana >= self.max_mana:
+                self.mana = self.max_mana
+        return self.mana
+
+    def add_gold(self, amount_gold):
+        if amount_gold >= 0:
+            self.gold += amount_gold
+        return self.gold
+
+    def spend_gold(self, amount_gold):
+        if amount_gold >= 0:
+            if self.gold >= amount_gold:
+                self.gold -= amount_gold
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    def is_alive(self):
+        return self.health > 0
+
+
+
 
