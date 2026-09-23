@@ -31,5 +31,19 @@ class Dungeon:
                 elif raw_choice == 'Enemy':
                     self.add_room(Room('Enemy', generate_enemy()))
 
+    def get_current_room(self):
+        if self.current_room_index <= len(self.rooms) - 1:
+            return self.rooms[self.current_room_index]
+        else:
+            return None
+
+    def move_to_next_room(self):
+        room = self.get_current_room()
+        if room is not None and room.is_completed:
+            self.current_room_index += 1
+
+
+
+
 
 
