@@ -61,6 +61,8 @@ def combat(character, enemy):
                 break
         else:
             print(f"{enemy.name} повержен!")
+            character.add_experience(enemy.experience_reward)
+            character.add_gold(enemy.gold_reward)
             break
 
 

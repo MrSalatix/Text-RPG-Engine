@@ -11,6 +11,7 @@ class Character:
         self.defense = defense
         self.level = 1
         self.experience = 0
+        self.max_experience = 100
         self.gold = 0
         self.max_health = max_health
         self.max_mana = max_mana
@@ -67,6 +68,41 @@ class Character:
         if amount_gold >= 0:
             self.gold += amount_gold
         return self.gold
+
+
+    def level_up(self):
+        self.level += 1
+        match self.character_class:
+            case 'Warrior':
+                self.max_health += 50
+                self.strength += 10
+                self.defense += 20
+            case 'Mage':
+                self.max_health += 10
+                self.strength += 30
+                self.defense += 1
+                self.max_mana += 100
+            case 'Archer':
+                self.max_health += 25
+                self.strength += 15
+                self.defense += 5
+                self.max_mana += 25
+        self.health = self.max_health
+        self.mana = self.max_mana
+        print(f"Братюнь ты достиг нового левела! Здоровье и мана восстановлены, статы улучшились")
+        self.describe_character()
+
+
+    def add_experience(self, amount_experience):
+        if amount_experience >= 0:
+            self.experience += amount_experience
+            if self.experience <= self.max_experience:
+                print(f"Exp: {self.experience} / {self.max_experience}")
+            while self.experience >= self.max_experience:
+                self.experience -= self.max_experience
+                self.level_up()
+
+
 
     def spend_gold(self, amount_gold):
         if amount_gold >= 0:
