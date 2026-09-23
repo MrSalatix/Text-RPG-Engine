@@ -81,6 +81,26 @@ class Character:
     def is_alive(self):
         return self.health > 0
 
+    def use_skill(self):
+        match self.character_class:
+            case 'Warrior':
+                print(f"{self.name} использует способность Power Strike")
+                skill_damage = [self.strength * 2]
+                return skill_damage
+            case 'Mage':
+                if self.spend_mana(30):
+                    print(f"{self.name} использует способность Fireball")
+                    skill_damage = [self.strength * 3]
+                    return skill_damage
+                else:
+                    return None
+            case 'Archer':
+                if self.spend_mana(15):
+                    print(f"{self.name} использует способность Double Shot")
+                    skill_damage = [self.strength, self.strength]
+                    return skill_damage
+                else:
+                    return None
 
 
 
