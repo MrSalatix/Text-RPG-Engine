@@ -1,5 +1,8 @@
+import dungeon
 from character import Character
+from dungeon import Dungeon
 from enemy import Enemy
+from combat import combat
 
 def menu():
     print("======================")
@@ -64,11 +67,36 @@ def create_character(character_name, character_class):
         case "Archer":
             character = Character(character_name, character_class, 15, 15, 100, 50)
     return character
+
+
 def new_game():
     character_name = character_name_choice()
     character_class = character_class_choice()
     character = create_character(character_name, character_class)
     character.describe_character()
+
+    dungeon = Dungeon()
+    dungeon.generate_dungeon(5)
+
+    while True:
+        current_room = dungeon.get_current_room()
+        if current_room is None:
+            print("Поземелье кончилось")
+            break
+        print(f"Ты вошел в комнату {dungeon.current_room_index + 1}")
+        current_room.describe_room()
+        if current_room.room_type == "Enemy":
+            combat(character, current_room.enemy)
+            if not character.is_alive():
+                print("Проиграл")
+                break
+
+
+
+        current_room.complete_room()
+        dungeon.move_to_next_room()
+
+
     return character
 
 
@@ -79,6 +107,7 @@ while True:
     should_exit = choice_menu_option()
     if should_exit:
         break
+
 
 
 
