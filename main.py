@@ -1,9 +1,10 @@
+import character
 from character import Character
 from dungeon import Dungeon
 from combat import combat
 from loot import generate_loot
 from event import random_event
-
+import save_manager
 
 dungeon_rooms_value = 5 #для удобства вынес жесть
 
@@ -64,7 +65,7 @@ def character_class_choice():
 def create_character(character_name, character_class):
     match character_class:
         case "Warrior":
-            character = Character(character_name, character_class, 222220, 5, 200, 0)
+            character = Character(character_name, character_class, 100, 5, 200, 0)
         case "Mage":
             character = Character(character_name, character_class, 30, 10, 50, 500)
         case "Archer":
@@ -122,6 +123,7 @@ def new_game():
         dungeon.move_to_next_room()
 
     character.statistics.show_statistics()
+    save_manager.save_character(character)
     return character
 
 
@@ -132,6 +134,8 @@ while True:
     should_exit = choice_menu_option()
     if should_exit:
         break
+
+
 
 
 
