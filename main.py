@@ -4,7 +4,8 @@ from combat import combat
 from loot import generate_loot
 from event import random_event
 
-dungeon_rooms_value = 1 #для удобства вынес жесть
+
+dungeon_rooms_value = 5 #для удобства вынес жесть
 
 def menu():
     print("======================")
@@ -63,7 +64,7 @@ def character_class_choice():
 def create_character(character_name, character_class):
     match character_class:
         case "Warrior":
-            character = Character(character_name, character_class, 20, 5, 200, 0)
+            character = Character(character_name, character_class, 222220, 5, 200, 0)
         case "Mage":
             character = Character(character_name, character_class, 30, 10, 50, 500)
         case "Archer":
@@ -92,6 +93,7 @@ def new_game():
                 print("Проиграл")
                 break
             else:
+                character.statistics.add_enemy_kills()
                 loot = generate_loot()
                 if loot is not None:
                     character.inventory.add_item(loot)
@@ -105,6 +107,8 @@ def new_game():
             if not character.is_alive():
                 print("Проиграл")
                 break
+            else:
+                character.statistics.add_boss_kills()
 
         elif current_room.room_type == "Event":
             random_event(character)
@@ -114,9 +118,10 @@ def new_game():
 
 
         current_room.complete_room()
+        character.statistics.add_room_completes()
         dungeon.move_to_next_room()
 
-
+    character.statistics.show_statistics()
     return character
 
 

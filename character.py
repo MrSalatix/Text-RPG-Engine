@@ -1,5 +1,5 @@
 from inventory import Inventory
-
+from statistics import Statistics
 
 class Character:
 
@@ -20,6 +20,7 @@ class Character:
         self.max_mana = max_mana
 
         self.inventory = Inventory(10)
+        self.statistics = Statistics()
     def describe_character(self):  #решил сделать так как удобнее
         print('== == == == == == == == == ==')
         print('CHARACTER')
@@ -39,10 +40,15 @@ class Character:
         print('== == == == == == == == == ==')
 
     def take_damage(self, amount_damage):
+        health_before = self.health
         if amount_damage >= 0:
             self.health -= amount_damage
             if self.health <= 0:
                 self.health = 0
+
+        health_after = self.health
+        stats_health = health_before - health_after
+        self.statistics.add_damage_taken(stats_health)
         return self.health
 
     def heal(self, amount_heal):
@@ -72,6 +78,7 @@ class Character:
     def add_gold(self, amount_gold):
         if amount_gold >= 0:
             self.gold += amount_gold
+            self.statistics.add_gold_earned(amount_gold)
             print(f"Шекелей: {self.gold}")
         return self.gold
 

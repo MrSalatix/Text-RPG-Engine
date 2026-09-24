@@ -15,5 +15,3 @@ class Item:
 
 
 
-temp = Item('Палка', 'Weapon', 20)
-temp.describe_item()
