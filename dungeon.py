@@ -1,10 +1,11 @@
 import random
 
+from boss_generator import generate_boss
 from enemy_generator import generate_enemy
 from room import Room
 
 room_types = ['Enemy', 'Empty', 'Event']
-
+boss_room = 'Boss'
 
 class Dungeon:
     def __init__(self):
@@ -24,7 +25,7 @@ class Dungeon:
         self.rooms = []
         self.current_room_index = 0
         if amount > 0:
-            for i in range(amount):
+            for i in range(amount-1):
                 raw_choice = random.choice(room_types)
                 if raw_choice == 'Empty':
                     self.add_room(Room('Empty'))
@@ -32,6 +33,7 @@ class Dungeon:
                     self.add_room(Room('Enemy', generate_enemy()))
                 elif raw_choice == 'Event':
                     self.add_room(Room('Event'))
+            self.add_room(Room(boss_room, generate_boss()))
 
     def get_current_room(self):
         if self.current_room_index <= len(self.rooms) - 1:
