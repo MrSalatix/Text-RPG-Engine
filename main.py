@@ -1,9 +1,9 @@
-import dungeon
 from character import Character
 from dungeon import Dungeon
-from enemy import Enemy
 from combat import combat
 from loot import generate_loot
+from event import random_event
+
 
 def menu():
     print("======================")
@@ -98,6 +98,12 @@ def new_game():
 
                 else:
                     print("Вам ничего не выпало:(")
+        elif current_room.room_type == "Event":
+            random_event(character)
+            if not character.is_alive():
+                print("Проиграл")
+                break
+
 
 
 

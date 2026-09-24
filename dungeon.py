@@ -3,7 +3,7 @@ import random
 from enemy_generator import generate_enemy
 from room import Room
 
-room_types = ['Enemy', 'Empty']
+room_types = ['Enemy', 'Empty', 'Event']
 
 
 class Dungeon:
@@ -30,6 +30,8 @@ class Dungeon:
                     self.add_room(Room('Empty'))
                 elif raw_choice == 'Enemy':
                     self.add_room(Room('Enemy', generate_enemy()))
+                elif raw_choice == 'Event':
+                    self.add_room(Room('Event'))
 
     def get_current_room(self):
         if self.current_room_index <= len(self.rooms) - 1:
