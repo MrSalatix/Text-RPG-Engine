@@ -1,3 +1,6 @@
+from inventory import Inventory
+
+
 class Character:
 
     def __init__(self, name, character_class, strength, defense, max_health, max_mana):
@@ -15,6 +18,8 @@ class Character:
         self.gold = 0
         self.max_health = max_health
         self.max_mana = max_mana
+
+        self.inventory = Inventory(10)
     def describe_character(self):  #решил сделать так как удобнее
         print('== == == == == == == == == ==')
         print('CHARACTER')
@@ -67,6 +72,7 @@ class Character:
     def add_gold(self, amount_gold):
         if amount_gold >= 0:
             self.gold += amount_gold
+            print(f"Шекелей: {self.gold}")
         return self.gold
 
 

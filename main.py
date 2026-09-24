@@ -3,6 +3,7 @@ from character import Character
 from dungeon import Dungeon
 from enemy import Enemy
 from combat import combat
+from loot import generate_loot
 
 def menu():
     print("======================")
@@ -77,7 +78,6 @@ def new_game():
 
     dungeon = Dungeon()
     dungeon.generate_dungeon(5)
-
     while True:
         current_room = dungeon.get_current_room()
         if current_room is None:
@@ -90,6 +90,14 @@ def new_game():
             if not character.is_alive():
                 print("Проиграл")
                 break
+            else:
+                loot = generate_loot()
+                if loot is not None:
+                    character.inventory.add_item(loot)
+                    print(f"Вам выпал предмет: {loot.name}")
+
+                else:
+                    print("Вам ничего не выпало:(")
 
 
 

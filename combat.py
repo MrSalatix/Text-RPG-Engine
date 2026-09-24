@@ -1,3 +1,5 @@
+from loot import generate_loot
+
 def damage_calculator(amount_strength, amount_defense):
     amount_damage = amount_strength
     if amount_damage > amount_defense:
