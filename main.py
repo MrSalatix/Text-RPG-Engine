@@ -1,4 +1,4 @@
-import character
+
 from character import Character
 from dungeon import Dungeon
 from combat import combat
@@ -23,7 +23,7 @@ def choice_menu_option():
         new_game()
         return False
     elif option == "2":
-        print("This don't work yet:(")
+        load_game()
         return False
     elif option == "3":
         print("Goodbye")
@@ -78,7 +78,16 @@ def new_game():
     character_class = character_class_choice()
     character = create_character(character_name, character_class)
     character.describe_character()
+    play_game(character)
 
+def load_game():
+    character_data = save_manager.load_save_data()
+    loaded_character = save_manager.dict_to_character(character_data)
+    play_game(loaded_character)
+
+
+
+def play_game(character):
     dungeon = Dungeon()
     dungeon.generate_dungeon(dungeon_rooms_value)
     while True:
@@ -117,7 +126,6 @@ def new_game():
                 print("Проиграл")
                 break
 
-
         current_room.complete_room()
         character.statistics.add_room_completes()
         dungeon.move_to_next_room()
@@ -125,8 +133,6 @@ def new_game():
     character.statistics.show_statistics()
     save_manager.save_character(character)
     return character
-
-
 
 
 while True:
